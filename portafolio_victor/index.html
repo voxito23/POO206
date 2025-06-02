@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portafolio Personal - Victor Osvaldo Rodríguez Hernández</title>
+<link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+
+<header>
+  <img src="Image/R.png" alt="Foto Victor Osvaldo Rodríguez Hernández" class="logo" />
+  <nav class="container">
+    <a href="#datos-personales" class="nav-link">Datos Personales</a>
+    <a href="#tecnologias" class="nav-link">Tecnologías</a>
+    <a href="#materias" class="nav-link">Materias</a>
+    <a href="#proyectos" class="nav-link">Proyectos</a>
+    <a href="#contacto" class="nav-link">Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <section id="datos-personales" class="section animated">
+    <h2>Datos Personales</h2>
+    <p><strong>Nombre:</strong> Victor Osvaldo Rodríguez Hernández</p>
+    <p><strong>Edad:</strong> 20 años</p>
+    <p><strong>Correo:</strong> 122044950@upq.edu.mx</p>
+  </section>
+
+  <section id="tecnologias" class="section animated">
+    <h2>Tecnologías y Lenguajes que conoces</h2>
+    <ul>
+      <li>C++</li>
+      <li>Java</li>
+    </ul>
+  </section>
+
+  <section id="materias" class="section animated">
+    <h2>Materias de Programación Cursadas</h2>
+    <ul>
+      <li>Introducción a la Programación</li>
+      <li>Introducción a las Tecnologías de la Información</li>
+      <li>Programación</li>
+      <li>Fundamentos de Programación Orientada a Objetos</li>
+      <li>Base de Datos</li>
+    </ul>
+  </section>
+
+  <section id="proyectos" class="section animated">
+    <h2>Proyectos Escolares</h2>
+    <ul>
+      <li>Proyecto Integrador - SentiMAt</li>
+      <li>Proyecto Integrador - Desarrollo de una aplicación web</li>
+    </ul>
+  </section>
+
+  <section id="contacto" class="section animated">
+    <h2>Contacto</h2>
+    <div class="contact-email">
+      <a href="mailto:122044950@upq.edu.mx" class="email-link" title="Enviar correo">
+        <img src="Image/gmail.png" alt="Gmail" />
+        <span>122044950@upq.edu.mx</span>
+      </a>
+    </div>
+    <div class="icon">
+      <a href="https://www.facebook.com/share/16RSZxkAW/" target="_blank" class="sm-icon" title="Facebook">
+        <img src="Image/facebook.png" alt="Facebook" />
+      </a>
+      <a href="https://www.instagram.com/osv_vic?igsh=MTUzeTJtY3Q4Znp3Zg==" target="_blank" class="sm-icon" title="Instagram">
+        <img src="Image/instagram.png" alt="Instagram" />
+      </a>
+      <a href="https://github.com/voxito23" target="_blank" class="sm-icon" title="GitHub">
+        <img src="Image/github.png" alt="GitHub" />
+      </a>
+    </div>
+  </section>
+</main>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animated').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

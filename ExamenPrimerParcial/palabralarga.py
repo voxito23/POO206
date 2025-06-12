@@ -7,7 +7,7 @@ while True:
         palabra1 = entrada.strip().split()
         p1 = len (palabra1)
         if len(palabra1) == 1:
-            palabra = palabra1[1]
+            palabra = palabra1[0]
             for i, letra in enumerate(palabra, 1):
                 print(f"letra {i}: {letra}")
         else:

@@ -9,52 +9,47 @@
     <h1>Formulario</h1>
     <a href="/consulta">Abrir vista Consulta</a>
 
-    <br>
-    <br>
-    <br>
+    <br><br><br>
 
-         {% with mensajes= get_flashed_messages()%}
-            {% if mensajes%}
-                    {%for msj in mensajes %}
-                        <h4 style="color:blue">{{ msj }}</h4>
-                    {%endfor%}
-            {% endif %}
-         {% endwith%}
- 
+    {% with mensajes = get_flashed_messages() %}
+      {% if mensajes %}
+        {% for msj in mensajes %}
+          <h4 style="color:blue">{{ msj }}</h4>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <form action="/guardarAlbum" method="post">
-
-        <input type="text" name="txtTitulo" placeholder="Titulo" value="{{ request.form.txtTitulo}}"> <!--cajas de texto con nomnre y etiquetas -->
+        <input type="text" name="txtTitulo"  placeholder="Titulo" value="{{ request.form.txtTitulo }}">
         {% if errores and errores.txtTitulo %}
-            <p style="color: #ff0055;">{{errores.txtTitulo}}</p>
-        {% endif %}
+        p style="color:#ff0055">{{ errores.txtTitulo }}</p>{% endif %}
 
-        <input type="text" name="txtArtista" placeholder="Artista" value="{{ request.form.txtArtista}}">
+        <input type="text" name="txtArtista" placeholder="Artista" value="{{ request.form.txtArtista }}">
         {% if errores and errores.txtArtista %}
-            <p style="color: #ff0055;">{{errores.txtArtista}}</p>
-        {% endif %}
+        <p style="color:#ff0055">{{ errores.txtArtista }}</p>{% endif %}
 
-        <input type="text" name="txtAnio" placeholder="Año de publicación" value="{{ request.form.txtAnio}}">
+        <input type="text" name="txtAnio"    placeholder="Año de publicación" value="{{ request.form.txtAnio }}">
         {% if errores and errores.txtAnio %}
-            <p style="color: #ff0055;">{{errores.txtAnio}}</p>
-        {% endif %}
+        <p style="color:#ff0055">{{ errores.txtAnio }}</p>{% endif %}
 
-        <button type="submit"> Guardar Album</button>
+        <button type="submit">Guardar Album</button>
     </form>
+
     <h1 style="color:blue">Albums Guardados</h1>
     <table>
-        <thead> 
+        <thead>
             <tr>
                 <td>Id:</td>
                 <td>Album:</td>
             </tr>
         </thead>
         <tbody>
-            {%for alb in albums%}
+            {% for alb in albums %}
             <tr>
                 <td>{{ alb.0 }}</td>
-                <td> <a href="/detalle/{{alb.0}}">{{ alb.1 }} </a> </td>
+                <td><a href="/detalle/{{ alb.0 }}">{{ alb.1 }}</a></td>
             </tr>
-            {%endfor%}
+            {% endfor %}
         </tbody>
     </table>
 </body>

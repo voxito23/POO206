@@ -43,6 +43,20 @@ def detalle(id):
     finally:
         cursor.close()        
 
+#Ruta de ediciom
+@app.route('/editar/<int:id>')
+def editar(id):
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM tb_album WHERE id=%s', (id,))
+        album = cursor.fetchone()
+        return render_template('actualizar.html', album=album, errores={})
+    except Exception as e:
+        print('Error al cargar album para editar: '+str(e))
+        flash('No se pudo cargar el album')
+        return redirect(url_for('home'))
+    finally:
+        cursor.close()
 #Ruta de consulta
 @app.route('/consulta')
 def consulta():
@@ -85,7 +99,45 @@ def guardar():
         finally:
             cursor.close()
             
-    return render_template('formulario.html', errores=errores)    
+    return render_template('formulario.html', errores=errores) 
+
+#Ruta para actualizar
+@app.route('/actualizarAlbum', methods=['POST'])
+def actualizar_album():
+    errores = {}
+    Vid      = request.form.get('id')
+    Vtitulo  = request.form.get('txtTitulo', '').strip()
+    Vartista = request.form.get('txtArtista', '').strip()
+    Vanio    = request.form.get('txtAnio', '').strip()
+
+    if not Vtitulo:
+        errores['txtTitulo']  = 'Nombre del album obligatorio'
+    if not Vartista:
+        errores['txtArtista'] = 'Nombre del artista obligatorio'
+    if not Vanio.isdigit() or int(Vanio) < 1800 or int(Vanio) > 2100:
+        errores['txtAnio']    = 'Ingresa un año válido'
+
+    if errores:
+     return render_template('actualizar.html',
+        album=(Vid, Vtitulo, Vartista, Vanio),
+        errores=errores)
+
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            'UPDATE tb_album SET album=%s, artista=%s, anio=%s WHERE id=%s',
+            (Vtitulo, Vartista, Vanio, Vid)
+        )
+        mysql.connection.commit()
+        flash('Album actualizado con exito')
+    except Exception as e:
+        mysql.connection.rollback()
+        flash('Algo fallo: ' + str(e))
+    finally:
+        cursor.close()
+
+    return redirect(url_for('home'))
+   
 
 #Ruta try-catch
 @app.errorhandler(404)

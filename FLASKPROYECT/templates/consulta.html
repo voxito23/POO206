@@ -7,13 +7,15 @@
 </head>
 <body>
     <h1 style="color:blue">Detalle de Album</h1>
+
     <table>
-        <thead> 
+        <thead>
             <tr>
                 <td>Id:</td>
                 <td>Album:</td>
                 <td>Artista:</td>
                 <td>Año de publicación:</td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -22,12 +24,14 @@
                 <td>{{ album.1 }}</td>
                 <td>{{ album.2 }}</td>
                 <td>{{ album.3 }}</td>
-                <td><a href="#">Actualizar</a></td>
-                <td><a href="#">Eliminar</a></td>
+                <td>   
+                    <a href="/editar/{{ album.0 }}">Actualizar</a>
+                    <a href="/eliminar/{{ album.0 }}">Eliminar</a>
+                </td>
             </tr>
         </tbody>
     </table>
     <br>
-<a href="/">Regresar al formulario</a>
+    <a href="/">Regresar al formulario</a>
 </body>
 </html>

@@ -1,0 +1,42 @@
+{% extends 'plantilla.html' %}
+{% block body %}
+<h1 class="text-primary mt-4 mb-3">Detalle de Álbum</h1>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover align-middle w-auto">
+      <thead class="table-primary text-center">
+          <tr>
+              <th style="min-width:60px">ID</th>
+              <th style="min-width:180px">Álbum</th>
+              <th style="min-width:180px">Artista</th>
+              <th style="min-width:110px">Año</th>
+              <th colspan="2" style="min-width:110px">Acciones</th>
+          </tr>
+      </thead>
+
+      <tbody>
+          <tr>
+              <td class="text-center fw-semibold">{{ album.0 }}</td>
+              <td>{{ album.1 }}</td>
+              <td>{{ album.2 }}</td>
+              <td class="text-center">{{ album.3 }}</td>
+
+              <td class="text-center">
+                  <a href="{{ url_for('albums.actualizar', id=album.0) }}"
+                     class="btn btn-sm btn-outline-primary">
+                     Actualizar
+                  </a>
+              </td>
+              <td class="text-center">
+                  <a href="{{ url_for('albums.eliminar', id=album.0) }}"
+                     class="btn btn-sm btn-outline-danger">
+                     Eliminar
+                  </a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<a class="btn btn-link mt-2" href="{{ url_for('albums.home') }}">Volver</a>
+{% endblock %}

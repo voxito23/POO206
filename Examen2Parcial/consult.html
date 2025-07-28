@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta De Reseñas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+        }
+        th, td {
+            border: 1px solid #888;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color:blue">Detalle del Restaurante</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre del restaurante</th>
+                <th>Tipo de comida</th>
+                <th>Comentario</th>
+                <th>Calificación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ Restaurante.0 }}</td>
+                <td>{{ Restaurante.1 }}</td>
+                <td>{{ Restaurante.2 }}</td>
+                <td>{{ Restaurante.3 }}</td>
+                <td>{{ Restaurante.4 }}</td>
+                <td>
+                    <a href="/editar/{{ Restaurante.0 }}">Actualizar</a>
+                    <a href="/eliminar/{{ Restaurante.0 }}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a href="/">Regresar a dejar una reseña</a>
+</body>
+</html>

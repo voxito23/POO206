@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReseñasParaRestaurante</title>
+</head>
+<body>
+    <h1>ReseñasParaRestaurante</h1>
+    <a href="/consulta">Abrir vista de Detalles de los Restaurantes</a>
+
+    <br><br><br>
+
+    {% with mensajes = get_flashed_messages() %}
+      {% if mensajes %}
+        {% for msj in mensajes %}
+          <h4 style="color:blue">{{ msj }}</h4>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/guardarresena" method="post">
+        <input type="text" name="txtRestaurante"  placeholder="Restaurante" value="{{ request.form.txtRestaurante }}">
+        {% if errores and errores.txtRestaurante %}
+        <p style="color: red">{{ errores.txtRestaurante }}</p>{% endif %}
+
+        <input type="text" name="txtTipo_de_Comida" placeholder="txtTipo de Comida" value="{{ request.form.txtTipo_de_Comida }}">
+        {% if errores and errores.txtTipo_de_Comida %}
+        <p style="color:red">{{ errores.txtTipo_de_Comida }}</p>{% endif %}
+
+        <input type="text" name="txtCalificacion"    placeholder="Califiacion de la reseña" value="{{ request.form.txtCalificacion }}">
+        {% if errores and errores.txtAnio %}
+        <p style="color: red">{{ errores.txtCalificacion }}</p>{% endif %}
+
+        <button type="submit">Guardar reseña</button>
+    </form>
+
+    <h1 style="color:blue">Reseñas Guardadas</h1>
+    <table>
+        <thead>
+            <tr>
+                <td>Id:</td>
+                <td>Nombredelrestaurante:</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alb in Restaurantes %}
+            <tr>
+                <td>{{ alb.0 }}</td>
+                <td><a href="/detalle/{{ restaurante.0 }}">{{ alb.1 }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

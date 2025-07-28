@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Reseñas</title>
+</head>
+<body>
+<h1 style="color:blue">Editar Reseñas</h1>
+{% with msj = get_flashed_messages() %}
+    {% for m in msj %}
+        <p style="color:blue">{{ m }}</p>
+    {% endfor %}
+{% endwith %}
+
+<form action="/actualizarRestaurante" method="post">
+    <input type="hidden" name="id" value="{{ restaurante.0 }}">
+
+    <label for="txtRestaurante">Restaurante:</label>
+    <input id="txtRestaurante" name="txtRestaurante" value="{{ restaurante.1 }}">
+    {% if errores.txtRestaurante %}
+        <p style="color:red">{{ errores.txtRestaurante }}</p>
+    {% endif %}
+
+    <label for="txtTipo_de_Comida">Tipo de Comida:</label>
+    <input id="txtTipo_de_Comida" name="txtTipo_de_Comida" value="{{ restaurante.2 }}">
+    {% if errores.txtTipo_de_Comida %}
+        <p style="color:red">{{ errores.txtTipo_de_Comida }}</p>
+    {% endif %}
+
+    <label for="txtCalificacion">Calificación:</label>
+    <input id="txtCalificacion" name="txtCalificacion" value="{{ restaurante.3 }}">
+    {% if errores.txtCalificacion %}
+        <p style="color:red">{{ errores.txtCalificacion }}</p>
+    {% endif %}
+
+    <button type="submit">Actualizar Reseña</button>
+</form>
+
+<p><a href="/">Volver</a></p>
+</body>
+</html>

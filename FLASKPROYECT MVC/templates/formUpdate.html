@@ -1,0 +1,48 @@
+{% extends 'plantilla.html' %}
+{% block body %}
+<div class="container mt-5" style="max-width:480px;">
+  <h2 class="text-primary mb-4">Editar Álbum</h2>
+
+  {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+      <div class="alert alert-info py-2">
+        {% for msj in mensajes %}
+          {{ msj }}<br>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <form action="{{ url_for('albums.actualizarAlbum', id=album.0) }}" method="post">
+    <div class="mb-3">
+      <label class="form-label">Título</label>
+      <input type="text" class="form-control" name="txtTitulo" value="{{ album.1 }}">
+      {% if errores and errores.txtTitulo %}
+        <div class="form-text text-danger">{{ errores.txtTitulo }}</div>
+      {% endif %}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Artista</label>
+      <input type="text" class="form-control" name="txtArtista" value="{{ album.2 }}">
+      {% if errores and errores.txtArtista %}
+        <div class="form-text text-danger">{{ errores.txtArtista }}</div>
+      {% endif %}
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label">Año de publicación</label>
+      <input type="text" class="form-control" name="txtAnio" value="{{ album.3 }}">
+      {% if errores and errores.txtAnio %}
+        <div class="form-text text-danger">{{ errores.txtAnio }}</div>
+      {% endif %}
+    </div>
+
+    <div class="d-grid">
+      <button class="btn btn-success" type="submit">Guardar cambios</button>
+    </div>
+  </form>
+
+  <a class="btn btn-link mt-3" href="{{ url_for('albums.home') }}">Volver</a>
+</div>
+{% endblock %}

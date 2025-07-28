@@ -1,0 +1,29 @@
+{% extends 'plantilla.html' %}
+{% block body %}
+<div class="container mt-5" style="max-width:460px;">
+  <h3 class="text-center text-purple mb-4" style="color: red;">¿Seguro que deseas eliminar?</h3>
+
+  <form action="{{ url_for('albums.confirmarEliminar', id=album.0) }}" method="post" class="border rounded p-4 bg-light">
+      <div class="mb-3">
+          <label class="form-label">Título</label>
+          <input type="text" class="form-control" value="{{ album.1 }}" disabled>
+      </div>
+
+      <div class="mb-3">
+          <label class="form-label">Artista</label>
+          <input type="text" class="form-control" value="{{ album.2 }}" disabled>
+      </div>
+
+      <div class="mb-4">
+          <label class="form-label">Año</label>
+          <input type="number" class="form-control" value="{{ album.3 }}" disabled>
+      </div>
+
+      <div class="d-grid">
+         <button type="submit" class="btn btn-danger">Eliminar Álbum</button>
+      </div>
+  </form>
+
+  <a class="btn btn-link mt-3" href="{{ url_for('albums.home') }}">Volver</a>
+</div>
+{% endblock %}

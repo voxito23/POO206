@@ -1,0 +1,64 @@
+{%extends 'plantilla.html'%}
+{%block body%}
+<div class="row">
+    <div class="col-md-5">
+         <h2 class="display-4 text-primary mt-5 mb-5">Registro de Albums</h2>
+
+         {% with mensajes= get_flashed_messages()%}
+            {% if mensajes%}
+                    {%for msj in mensajes %}
+                        <h4 style="color:blue">{{ msj }}</h4>
+                    {%endfor%}
+            {% endif %}
+         {% endwith%}
+ 
+    <form action="/guardarAlbum" method="post">
+        <div class="mb-3">
+            <input type="text" class="form-control" name="txtTitulo" placeholder="Titulo" value="{{ request.form.txtTitulo}}">
+            {% if errores and errores.txtTitulo %}
+                <p style="color: #ff0055;">{{errores.txtTitulo}}</p>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="txtArtista" placeholder="Artista" value="{{ request.form.txtArtista}}">
+            {% if errores and errores.txtArtista %}
+                <p style="color: #ff0055;">{{errores.txtArtista}}</p>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="txtAnio" placeholder="Año de publicación" value="{{ request.form.txtAnio}}">
+            {% if errores and errores.txtAnio %}
+                <p style="color: #ff0055;">{{errores.txtAnio}}</p>
+            {% endif %}
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-success" type="submit">Guardar Album</button>
+        </div>
+        
+    </form>
+    </div> <!-- columna 5 -->
+    <div class="col-md-7">
+    <h2 class="display-4 text-primary mt-5 mb-5">Albums Guardados</h2>
+    <div class="table-responsive">
+<table class="table table-striped table-bordered table-sm w-auto">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Álbum</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for alb in albums %}
+      <tr>
+        <td>{{ alb.0 }}</td>
+        <td>
+          <a href="{{ url_for('albums.detalle', id=alb.0) }}" class="link-primary text-decoration-none">
+            {{ alb.1 }}
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>    
+{%endblock%}
